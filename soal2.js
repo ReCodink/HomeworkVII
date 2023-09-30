@@ -1,22 +1,27 @@
 // Membuat Variable fs untuk mengambil module fs
-let fs = require("fs");
+const fs = require("fs");
 
-// Membuat Syntax Read File dengan module fs
-fs.readFile("log.txt", "utf-8", (err, data) => {
+// variable sebagai penampung mengambil data dari homework-log
+const dataLog = "homework-log.txt"; 
+
+// Membuat fungsi readFile untuk membaca isi dataLog
+fs.readFile(dataLog, "utf-8", (err, data) => {
     // Membuat Statement If Else untuk mendeteksi error atau tidak
     if (err){
-        console.error(`Terjadi Kesalahan: `, err.message);
+        console.error(`Terjadi Kesalahan saat menulis file: `, err.message);
     } else {
         console.info(data);
         console.info("Berhasil Membaca Data Logging");
         
-        // Membuat Syntax Append File dengan module fs
-        let writeData = "\nNew File Content";
-        fs.writeFile("log.txt", writeData, (err) => {
+        // variabel sebagai penampung baru dataLog yang akan dieksekusi ke file log
+        const newDataLog = data + dataLog;
+        
+        // Membuat fungsi writeFile untuk menulis data dari newDataLog ke file log
+        fs.writeFile("/log.txt", newDataLog, "utf-8", (err) => {
             if (err) {
-                console.error(`Terjadi Kesalahan: `, err.message);
+                console.error(`Terjadi Kesalahan saat menulis file: `, err.message);
             } else {
-                console.info("Data berhasil ditulis ke log.txt");
+                console.info("Data berhasil ditulis ke file log.txt");
             }
         });
     }
